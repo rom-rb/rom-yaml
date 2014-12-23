@@ -1,3 +1,6 @@
 users:
   - name: 'Jane'
     email: 'jane@doe.org'
+    roles:
+      - role_name: 'Member'
+      - role_name: 'Admin'

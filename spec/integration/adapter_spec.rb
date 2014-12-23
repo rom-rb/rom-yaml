@@ -14,6 +14,7 @@ describe 'YAML adapter' do
 
         attribute 'name'
         attribute 'email'
+        attribute 'roles'
       end
     end
 
@@ -29,6 +30,10 @@ describe 'YAML adapter' do
 
         attribute :name, from: 'name'
         attribute :email, from: 'email'
+
+        embedded :roles, from: 'roles' do
+          attribute :name, from: 'role_name'
+        end
       end
     end
   end
@@ -39,6 +44,10 @@ describe 'YAML adapter' do
 
       expect(jane.name).to eql('Jane')
       expect(jane.email).to eql('jane@doe.org')
+      expect(jane.roles.length).to eql(2)
+      expect(jane.roles).to eql([
+        { name: 'Member' } , { name: 'Admin' }
+      ])
     end
   end
 end
