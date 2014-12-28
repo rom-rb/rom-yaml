@@ -4,7 +4,7 @@
 [codeclimate]: https://codeclimate.com/github/rom-rb/rom-yaml
 [inchpages]: http://inch-ci.org/github/rom-rb/rom-yaml
 
-# ROM::yaml
+# ROM::YAML
 
 [![Gem Version](https://badge.fury.io/rb/rom-yaml.svg)][gem]
 [![Build Status](https://travis-ci.org/rom-rb/rom-yaml.svg?branch=master)][travis]
