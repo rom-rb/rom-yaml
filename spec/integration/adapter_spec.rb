@@ -9,18 +9,12 @@ describe 'YAML adapter' do
 
   before do
     setup.schema do
-      base_relation(:users) do
-        repository :default
-
-        attribute 'name'
-        attribute 'email'
-        attribute 'roles'
-      end
+      base_relation(:users) { repository :default }
     end
 
     setup.relation(:users) do
       def by_name(name)
-        find_all { |user| user['name'] == name }
+        find_all { |user| user[:name] == name }
       end
     end
 
@@ -28,10 +22,10 @@ describe 'YAML adapter' do
       define(:users) do
         model name: 'User'
 
-        attribute :name, from: 'name'
-        attribute :email, from: 'email'
+        attribute :name
+        attribute :email
 
-        embedded :roles, from: 'roles' do
+        embedded :roles, type: :array do
           attribute :name, from: 'role_name'
         end
       end
@@ -40,7 +34,7 @@ describe 'YAML adapter' do
 
   describe 'env#read' do
     it 'returns mapped object' do
-      jane = rom.read(:users).by_name('Jane').to_a.first
+      jane = rom.read(:users).by_name('Jane').first
 
       expect(jane.name).to eql('Jane')
       expect(jane.email).to eql('jane@doe.org')
