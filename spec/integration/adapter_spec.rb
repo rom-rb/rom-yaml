@@ -8,10 +8,6 @@ describe 'YAML adapter' do
   let(:setup) { ROM.setup("yaml://#{root}/fixtures/test_db.yml") }
 
   before do
-    setup.schema do
-      base_relation(:users) { repository :default }
-    end
-
     setup.relation(:users) do
       def by_name(name)
         find_all { |user| user[:name] == name }
