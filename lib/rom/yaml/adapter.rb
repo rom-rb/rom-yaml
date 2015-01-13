@@ -9,7 +9,7 @@ module ROM
         [:yaml]
       end
 
-      def setup_connection
+      def setup
         @datasets = {}
         @connection = ::YAML.load_file("#{uri.host}#{uri.path}")
       end
