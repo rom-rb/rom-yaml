@@ -1,8 +1,9 @@
+require 'rom/repository'
 require 'rom/yaml/dataset'
 
 module ROM
   module YAML
-    class Adapter < ROM::Adapter
+    class Repository < ROM::Repository
       attr_reader :datasets
 
       def self.schemes
