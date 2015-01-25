@@ -1,8 +1,8 @@
-require 'rom/adapter/memory/dataset'
+require 'rom/memory/dataset'
 
 module ROM
   module YAML
-    class Dataset < ROM::Adapter::Memory::Dataset
+    class Dataset < ROM::Memory::Dataset
       def self.row_proc
         # TODO: this is not recursive
         Transproc(:symbolize_keys)

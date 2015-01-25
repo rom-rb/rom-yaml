@@ -6,13 +6,9 @@ module ROM
     class Repository < ROM::Repository
       attr_reader :datasets
 
-      def self.schemes
-        [:yaml]
-      end
-
-      def setup
+      def initialize(path)
         @datasets = {}
-        @connection = ::YAML.load_file("#{uri.host}#{uri.path}")
+        @connection = ::YAML.load_file(path)
       end
 
       def [](name)
