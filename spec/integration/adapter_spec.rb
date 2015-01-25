@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+require 'rom/lint/spec'
+
 describe 'YAML adapter' do
   subject(:rom) { setup.finalize }
 
