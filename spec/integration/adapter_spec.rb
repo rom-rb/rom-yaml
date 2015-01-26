@@ -1,11 +1,14 @@
 require 'spec_helper'
 
+require 'rom/lint/spec'
+
 describe 'YAML adapter' do
   subject(:rom) { setup.finalize }
 
   let(:root) { Pathname(__FILE__).dirname.join('..') }
 
-  let(:setup) { ROM.setup("yaml://#{root}/fixtures/test_db.yml") }
+  let(:path) { "#{root}/fixtures/test_db.yml" }
+  let(:setup) { ROM.setup(:yaml, path) }
 
   before do
     setup.relation(:users) do
