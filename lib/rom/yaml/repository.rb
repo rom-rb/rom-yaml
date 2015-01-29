@@ -3,6 +3,8 @@ require 'rom/yaml/dataset'
 
 module ROM
   module YAML
+    Relation = Class.new(ROM::Relation)
+
     class Repository < ROM::Repository
       attr_reader :datasets
 
