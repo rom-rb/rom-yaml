@@ -13,7 +13,7 @@ describe 'YAML adapter' do
   before do
     setup.relation(:users) do
       def by_name(name)
-        find_all { |user| user[:name] == name }
+        dataset.find_all { |user| user[:name] == name }
       end
     end
 
