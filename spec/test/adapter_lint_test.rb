@@ -8,7 +8,7 @@ class MemoryAdapterLintTest < MiniTest::Test
 
   def setup
     @adapter = ROM::YAML::Adapter
-    @uri = "yaml://#{File.expand_path("./spec/fixtures/test_db.yml")}"
+    @uri = "yaml://#{File.expand_path('./spec/fixtures/test_db.yml')}"
   end
 end
 

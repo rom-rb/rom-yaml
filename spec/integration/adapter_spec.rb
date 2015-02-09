@@ -39,7 +39,7 @@ describe 'YAML adapter' do
       expect(jane.email).to eql('jane@doe.org')
       expect(jane.roles.length).to eql(2)
       expect(jane.roles).to eql([
-        { name: 'Member' } , { name: 'Admin' }
+        { name: 'Member' }, { name: 'Admin' }
       ])
     end
   end

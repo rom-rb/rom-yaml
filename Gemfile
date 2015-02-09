@@ -9,3 +9,7 @@ group :test do
   gem 'virtus'
   gem 'minitest'
 end
+
+group :tools do
+  gem 'rubocop'
+end
