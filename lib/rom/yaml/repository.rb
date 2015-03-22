@@ -7,13 +7,17 @@ module ROM
   module YAML
     # YAML repository
     #
-    # @example
-    #   repository = ROM::YAML::Repository.new('/path/to/data.yml')
-    #   repository.dataset(:users)
-    #   repository.dataset?(:users) # => true
-    #   repository[:users]
+    # Connects to a yaml file and uses it as a data-source
     #
-    # Connects to a yaml file and use it as a data-source
+    # @example
+    #   ROM.setup(:yaml, '/path/to/data.yml')
+    #
+    #   rom = ROM.finalize.env
+    #
+    #   repository = rom.repositories[:default]
+    #
+    #   repository.dataset?(:users) # => true
+    #   repository[:users] # => data under 'users' key from the yaml file
     #
     # @api public
     class Repository < ROM::Repository
