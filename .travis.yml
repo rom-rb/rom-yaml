@@ -1,7 +1,7 @@
 language: ruby
 bundler_args: --without tools
 env:
-  - CODECLIMATE_REPO_TOKEN=886f3b795e74159719804f8e18b853f4c23a81bd814404e52ec248a0dae6d656
+  - CODECLIMATE_REPO_TOKEN=ef69eb6a9e19987527e5010a02bbf71cd4ddc8a5137ba308f299817f56d06e7f
 script: "bundle exec rake spec"
 rvm:
   - 2.0
