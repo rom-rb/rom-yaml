@@ -45,4 +45,25 @@ describe 'YAML adapter' do
       ])
     end
   end
+
+  describe 'multi-file setup' do
+    it 'uses one-file-per-relation' do
+      setup = ROM.setup(:yaml, "#{root}/fixtures/db")
+
+      setup.relation(:users)
+      setup.relation(:tasks)
+
+      rom = setup.finalize
+
+      expect(rom.relation(:users)).to match_array([
+        { name: 'Jane', email: 'jane@doe.org' }
+      ])
+
+      expect(rom.relation(:tasks)).to match_array([
+        { title: 'Task One' },
+        { title: 'Task Two' },
+        { title: 'Task Three' }
+      ])
+    end
+  end
 end

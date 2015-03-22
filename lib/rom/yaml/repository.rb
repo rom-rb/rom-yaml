@@ -31,7 +31,16 @@ module ROM
       # @api private
       def initialize(path)
         @datasets = {}
-        @connection = ::YAML.load_file(path)
+
+        if File.directory?(path)
+          @connection = Dir["#{path}/*.yml"].each_with_object({}) do |file, h|
+            name = File.basename(file, '.*')
+            data = ::YAML.load_file(file)[name.to_s]
+            h[name] = data
+          end
+        else
+          @connection = ::YAML.load_file(path)
+        end
       end
 
       # Return dataset by its name
