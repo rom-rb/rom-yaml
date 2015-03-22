@@ -13,12 +13,14 @@ describe 'YAML adapter' do
   before do
     setup.relation(:users) do
       def by_name(name)
-        dataset.find_all { |user| user[:name] == name }
+        restrict(name: name)
       end
     end
 
     setup.mappers do
       define(:users) do
+        register_as :entity
+
         model name: 'User'
 
         attribute :name
@@ -31,9 +33,9 @@ describe 'YAML adapter' do
     end
   end
 
-  describe 'env#read' do
+  describe 'env#relation' do
     it 'returns mapped object' do
-      jane = rom.read(:users).by_name('Jane').first
+      jane = rom.relation(:users).as(:entity).by_name('Jane').first
 
       expect(jane.name).to eql('Jane')
       expect(jane.email).to eql('jane@doe.org')

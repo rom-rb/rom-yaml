@@ -7,6 +7,11 @@ end
 
 require 'rom-yaml'
 
+begin
+  require 'byebug'
+rescue LoadError
+end
+
 root = Pathname(__FILE__).dirname
 
 Dir[root.join('shared/*.rb').to_s].each { |f| require f }
