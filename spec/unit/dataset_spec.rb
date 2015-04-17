@@ -13,8 +13,8 @@ describe ROM::YAML::Dataset do
     expect(dataset.to_a).to eq([{ foo: 23 }])
   end
 
-  it "does not symbolizes keys recursively" do
+  it "symbolizes keys recursively" do
     dataset = ROM::YAML::Dataset.new(["foo" => { "bar" => :baz }])
-    expect(dataset.to_a).to eq([foo: { "bar" => :baz }])
+    expect(dataset.to_a).to eq([foo: { bar: :baz }])
   end
 end
