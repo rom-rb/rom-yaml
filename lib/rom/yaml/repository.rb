@@ -32,6 +32,20 @@ module ROM
       # @api private
       attr_reader :datasets
 
+      # Create a new yaml repository from a path to file(s)
+      #
+      # @example
+      #   repository = ROM::YAML::Repository.new('/path/to/files')
+      #
+      # @param [String, Pathname] path The path to your YAML file(s)
+      #
+      # @return [Repository]
+      #
+      # @api public
+      def self.new(path)
+        super(load_from(path))
+      end
+
       # Load data from yaml file(s)
       #
       # @api private
@@ -63,8 +77,8 @@ module ROM
       # @param [String] path The absolute path to yaml file
       #
       # @api private
-      def initialize(path)
-        @sources = self.class.load_from(path)
+      def initialize(sources)
+        @sources = sources
         @datasets = {}
       end
 
