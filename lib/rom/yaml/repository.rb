@@ -1,6 +1,5 @@
 require 'yaml'
 
-require 'rom/support/options'
 require 'rom/repository'
 require 'rom/yaml/dataset'
 
