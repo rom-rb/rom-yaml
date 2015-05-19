@@ -1,5 +1,6 @@
 require 'yaml'
 
+require 'rom/support/options'
 require 'rom/repository'
 require 'rom/yaml/dataset'
 
@@ -21,26 +22,50 @@ module ROM
     #
     # @api public
     class Repository < ROM::Repository
-      # Registered datasets
+      # @attr_reader [Hash] sources Data loaded from files
+      #
+      # @api private
+      attr_reader :sources
+
+      # @attr_reader [Hash] datasets YAML datasets from sources
       #
       # @api private
       attr_reader :datasets
+
+      # Load data from yaml file(s)
+      #
+      # @api private
+      def self.load_from(path)
+        if File.directory?(path)
+          load_files(path)
+        else
+          load_file(path)
+        end
+      end
+
+      # Load yaml files from a given directory and return a name => data map
+      #
+      # @api private
+      def self.load_files(path)
+        Dir["#{path}/*.yml"].each_with_object({}) do |file, h|
+          name = File.basename(file, '.*')
+          h[name] = load_file(file).fetch(name)
+        end
+      end
+
+      # Load yaml file
+      #
+      # @api private
+      def self.load_file(path)
+        ::YAML.load_file(path)
+      end
 
       # @param [String] path The absolute path to yaml file
       #
       # @api private
       def initialize(path)
+        @sources = self.class.load_from(path)
         @datasets = {}
-
-        if File.directory?(path)
-          @connection = Dir["#{path}/*.yml"].each_with_object({}) do |file, h|
-            name = File.basename(file, '.*')
-            data = ::YAML.load_file(file)[name]
-            h[name] = data
-          end
-        else
-          @connection = ::YAML.load_file(path)
-        end
       end
 
       # Return dataset by its name
@@ -62,7 +87,7 @@ module ROM
       #
       # @api public
       def dataset(name)
-        datasets[name] = Dataset.new(connection.fetch(name.to_s))
+        datasets[name] = Dataset.new(sources.fetch(name.to_s))
       end
 
       # Return if a dataset with provided name exists
