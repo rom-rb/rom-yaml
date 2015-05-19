@@ -4,9 +4,9 @@
 
 * Support for loading relations from multiple files (solnic)
 
-
 ### Changed
 
+* Symbolize keys recursively in tuples (cflipse)
 * Make it work with ROM 0.7.0 (cflipse)
 
 [Compare v0.0.1...HEAD](https://github.com/rom-rb/rom-yaml/compare/v0.0.1...HEAD)
