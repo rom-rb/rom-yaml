@@ -9,7 +9,7 @@
 
 * Make it work with ROM 0.7.0 (cflipse)
 
-[Compare v0.0.1...HEAD](https://github.com/rom-rb/rom/compare/v0.0.1...HEAD)
+[Compare v0.0.1...HEAD](https://github.com/rom-rb/rom-yaml/compare/v0.0.1...HEAD)
 
 ## v0.0.1 2015-03-22
 
