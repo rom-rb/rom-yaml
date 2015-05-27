@@ -1,11 +1,11 @@
 require 'yaml'
 
-require 'rom/repository'
+require 'rom/gateway'
 require 'rom/yaml/dataset'
 
 module ROM
   module YAML
-    # YAML repository
+    # YAML gateway
     #
     # Connects to a yaml file and uses it as a data-source
     #
@@ -14,13 +14,13 @@ module ROM
     #
     #   rom = ROM.finalize.env
     #
-    #   repository = rom.repositories[:default]
+    #   gateway = rom.gateways[:default]
     #
-    #   repository.dataset?(:users) # => true
-    #   repository[:users] # => data under 'users' key from the yaml file
+    #   gateway.dataset?(:users) # => true
+    #   gateway[:users] # => data under 'users' key from the yaml file
     #
     # @api public
-    class Repository < ROM::Repository
+    class Gateway < ROM::Gateway
       # @attr_reader [Hash] sources Data loaded from files
       #
       # @api private
@@ -31,14 +31,14 @@ module ROM
       # @api private
       attr_reader :datasets
 
-      # Create a new yaml repository from a path to file(s)
+      # Create a new yaml gateway from a path to file(s)
       #
       # @example
-      #   repository = ROM::YAML::Repository.new('/path/to/files')
+      #   gateway = ROM::YAML::Gateway.new('/path/to/files')
       #
       # @param [String, Pathname] path The path to your YAML file(s)
       #
-      # @return [Repository]
+      # @return [Gateway]
       #
       # @api public
       def self.new(path)
