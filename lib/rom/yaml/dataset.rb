@@ -10,7 +10,7 @@ module ROM
       #
       # @api private
       def self.row_proc
-        Transproc(:hash_recursion, Transproc(:symbolize_keys))
+        Transproc[:hash_recursion, Transproc[:symbolize_keys]]
       end
     end
   end
