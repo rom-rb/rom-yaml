@@ -6,6 +6,7 @@ module ROM
     #
     # @api private
     class Relation < ROM::Relation
+      adapter :yaml
       forward :join, :project, :restrict, :order
     end
   end
