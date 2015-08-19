@@ -1,8 +1,8 @@
-## v0.2.0.rc
+## v0.2.0
 
 ### Changed
 
-* Updated to work with pending registration changes
+* Updated to work with pending registration changes (cflipse)
 
 ## v0.1.2
 
