@@ -19,7 +19,7 @@ Style/AsciiComments:
   Enabled: false
 
 # Allow using braces for value-returning blocks
-Style/Blocks:
+Style/BlockDelimiters:
   Enabled: false
 
 # Documentation checked by Inch CI
@@ -37,10 +37,6 @@ Style/Lambda:
 # Multiline block chains are ok
 Style/MultilineBlockChain:
   Enabled: false
-
-# Even a single escaped slash can be confusing
-Style/RegexpLiteral:
-  MaxSlashes: 0
 
 # Don’t introduce semantic fail/raise distinction
 Style/SignalException:
