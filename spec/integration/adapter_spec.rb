@@ -3,22 +3,43 @@ require 'spec_helper'
 require 'rom/lint/spec'
 
 describe 'YAML adapter' do
-  subject(:rom) { setup.finalize }
+  let(:configuration) do
+    ROM::Configuration.new( :yaml, path )
+  end
 
   let(:root) { Pathname(__FILE__).dirname.join('..') }
 
-  let(:path) { "#{root}/fixtures/test_db.yml" }
-  let(:setup) { ROM.setup(:yaml, path) }
 
-  before do
-    setup.relation(:users) do
-      def by_name(name)
-        restrict(name: name)
+
+  let(:path) { "#{root}/fixtures/test_db.yml" }
+  let(:container) { ROM.container(configuration) }
+
+  subject(:rom) { container }
+
+  let(:configuration) do
+    ROM::Configuration.new( :yaml, path )
+  end
+
+  let(:root) { Pathname(__FILE__).dirname.join('..') }
+  let(:container) { ROM.container(configuration) }
+  let(:rom) { container }
+
+  describe "single file configuration" do
+    let(:path) { "#{root}/fixtures/test_db.yml" }
+
+    let(:users_relation) do
+      Class.new(ROM::YAML::Relation) do
+        dataset :users
+
+        def by_name(name)
+          restrict(name: name)
+        end
       end
     end
 
-    setup.mappers do
-      define(:users) do
+    let(:user_mapper) do
+      Class.new(ROM::Mapper) do
+        relation :users
         register_as :entity
 
         model name: 'User'
@@ -31,30 +52,47 @@ describe 'YAML adapter' do
         end
       end
     end
-  end
 
-  describe 'env#relation' do
-    it 'returns mapped object' do
-      jane = rom.relation(:users).as(:entity).by_name('Jane').first
+    before do
+      configuration.register_relation(users_relation)
+      configuration.register_mapper(user_mapper)
+    end
 
-      expect(jane.name).to eql('Jane')
-      expect(jane.email).to eql('jane@doe.org')
-      expect(jane.roles.length).to eql(2)
-      expect(jane.roles).to eql([
-        { name: 'Member' }, { name: 'Admin' }
-      ])
+    describe 'env#relation' do
+      it 'returns mapped object' do
+        jane = rom.relation(:users).as(:entity).by_name('Jane').first
+
+        expect(jane.name).to eql('Jane')
+        expect(jane.email).to eql('jane@doe.org')
+        expect(jane.roles.length).to eql(2)
+        expect(jane.roles).to eql([
+          { name: 'Member' }, { name: 'Admin' }
+        ])
+      end
     end
   end
 
   describe 'multi-file setup' do
+    let(:path) { "#{root}/fixtures/db" }
+
+    let(:users_relation) do
+      Class.new(ROM::YAML::Relation) do
+        dataset :users
+      end
+    end
+
+    let(:tasks_relation) do
+      Class.new(ROM::YAML::Relation) do
+        dataset :tasks
+      end
+    end
+
+    before do
+      configuration.register_relation(users_relation)
+      configuration.register_relation(tasks_relation)
+    end
+
     it 'uses one-file-per-relation' do
-      setup = ROM.setup(:yaml, "#{root}/fixtures/db")
-
-      setup.relation(:users)
-      setup.relation(:tasks)
-
-      rom = setup.finalize
-
       expect(rom.relation(:users)).to match_array([
         { name: 'Jane', email: 'jane@doe.org' }
       ])
