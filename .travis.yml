@@ -20,3 +20,5 @@ notifications:
     on_success: change
     on_failure: always
     on_start: false
+before_install:
+  - gem install bundler -v 1.10.6
