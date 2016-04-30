@@ -1,8 +1,26 @@
+## v0.4.0
+
+### Changed
+
+* Updated to work with ROM 2.0 (pre-release) (cflipse)
+
+[Compare v0.3.0...v0.4.0](https://github.com/rom-rb/rom-yaml/compare/v0.3.0...v0.4.0)
+
+## v0.3.0
+
+### Changed
+
+* Updated to work with ROM 1.0 (cflipse)
+
+[Compare v0.2.0...v0.3.0](https://github.com/rom-rb/rom-yaml/compare/v0.2.0...v0.3.0)
+
 ## v0.2.0
 
 ### Changed
 
 * Updated to work with pending registration changes (cflipse)
+
+[Compare v0.1.2...v0.3.0](https://github.com/rom-rb/rom-yaml/compare/v0.1.2...v0.2.0)
 
 ## v0.1.2
 
@@ -10,7 +28,7 @@
 
 * Updated to work with Transproc 0.3.0 (cflipse)
 
-[Compare v0.1.1...v0.2.0](https://github.com/rom-rb/rom-yaml/compare/v0.1.1...v0.2.0)
+[Compare v0.1.1...v0.1.2](https://github.com/rom-rb/rom-yaml/compare/v0.1.1...v0.1.2)
 
 ## v0.1.1
 
