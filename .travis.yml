@@ -1,18 +1,24 @@
 language: ruby
+dist: trusty
+sudo: required
+cache: bundler
 bundler_args: --without tools
-env:
-  - CODECLIMATE_REPO_TOKEN=ef69eb6a9e19987527e5010a02bbf71cd4ddc8a5137ba308f299817f56d06e7f
 script: "bundle exec rake spec"
+after_success:
+  - '[ -d coverage ] && bundle exec codeclimate-test-reporter'
 rvm:
-  - 2.0
-  - 2.1
-  - 2.2
-  - rbx-2
-  - jruby-9000
-  - ruby-head
+  - 2.2.6
+  - 2.3.3
+  - 2.4.0
+  - rbx-3
+  - jruby-9.1.5.0
+env:
+  global:
+    - JRUBY_OPTS='--dev -J-Xmx1024M'
+    - COVERAGE='true'
 matrix:
   allow_failures:
-    - rvm: ruby-head
+    - rvm: rbx-3
 notifications:
   webhooks:
     urls:
@@ -20,5 +26,3 @@ notifications:
     on_success: change
     on_failure: always
     on_start: false
-before_install:
-  - gem install bundler -v 1.10.6
