@@ -1,3 +1,16 @@
+## v1.0.0 to-be-released
+
+### Added
+
+* [BREAKING] Schema support in relations (you *must* define schemas now) (solnic)
+* Support for rom-repository (solnic)
+
+### Changed
+
+* `YAML` relations inherit now from `Memory::Relation` (solnic)
+
+[Compare v0.4.0...v1.0.0](https://github.com/rom-rb/rom-yaml/compare/v0.4.0...v1.0.0)
+
 ## v0.4.0
 
 ### Changed
