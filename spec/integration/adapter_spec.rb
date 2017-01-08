@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'rom/lint/spec'
 
-describe 'YAML adapter' do
+RSpec.describe 'YAML adapter' do
   let(:configuration) do
     ROM::Configuration.new( :yaml, path )
   end
@@ -44,7 +44,7 @@ describe 'YAML adapter' do
         relation :users
         register_as :entity
 
-        model name: 'User'
+        model name: 'Test::User'
 
         attribute :name
         attribute :email

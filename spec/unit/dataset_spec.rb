@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'rom/lint/spec'
 
-describe ROM::YAML::Dataset do
+RSpec.describe ROM::YAML::Dataset do
   let(:data) { [{ id: 1 }, { id: 2 }] }
   let(:dataset) { ROM::YAML::Dataset.new(data) }
 

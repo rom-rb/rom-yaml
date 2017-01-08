@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'rom/lint/spec'
 
-describe ROM::YAML::Gateway do
+RSpec.describe ROM::YAML::Gateway do
   let(:root) { Pathname(__FILE__).dirname.join('..') }
 
   it_behaves_like 'a rom gateway' do
