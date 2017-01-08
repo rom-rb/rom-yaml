@@ -1,4 +1,5 @@
 require 'rom/memory'
+require 'rom/plugins/relation/key_inference'
 
 module ROM
   module YAML
@@ -7,6 +8,7 @@ module ROM
     # @api private
     class Relation < ROM::Memory::Relation
       adapter :yaml
+      use :key_inference
     end
   end
 end

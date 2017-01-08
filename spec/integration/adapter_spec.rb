@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 require 'rom/lint/spec'
+require 'rom/repository'
 
 RSpec.describe 'YAML adapter' do
   let(:configuration) do
@@ -70,6 +71,20 @@ RSpec.describe 'YAML adapter' do
         expect(jane.roles).to eql([
           { name: 'Member' }, { name: 'Admin' }
         ])
+      end
+    end
+
+    describe 'with a repository' do
+      let(:repo) do
+        Class.new(ROM::Repository[:users]).new(rom)
+      end
+
+      it 'auto-maps to structs' do
+        user = repo.users.first
+
+        expect(user.name).to eql('Jane')
+        expect(user.email).to eql('jane@doe.org')
+        expect(user.roles.size).to be(2)
       end
     end
   end
