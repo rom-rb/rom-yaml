@@ -9,8 +9,6 @@ describe 'YAML adapter' do
 
   let(:root) { Pathname(__FILE__).dirname.join('..') }
 
-
-
   let(:path) { "#{root}/fixtures/test_db.yml" }
   let(:container) { ROM.container(configuration) }
 
@@ -29,7 +27,11 @@ describe 'YAML adapter' do
 
     let(:users_relation) do
       Class.new(ROM::YAML::Relation) do
-        dataset :users
+        schema(:users) do
+          attribute :name, ROM::Types::String
+          attribute :email, ROM::Types::String
+          attribute :roles, ROM::Types::Array
+        end
 
         def by_name(name)
           restrict(name: name)
