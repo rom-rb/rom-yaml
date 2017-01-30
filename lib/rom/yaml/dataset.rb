@@ -10,8 +10,16 @@ module ROM
       #
       # @api private
       def self.row_proc
-        Transproc[:hash_recursion, Transproc[:symbolize_keys]]
+        Transforms[:hash_recursion, Transforms[:symbolize_keys]]
       end
+    end
+
+
+    # @api private
+    class Transforms
+      extend Transproc::Registry
+      import Transproc::HashTransformations
+      import Transproc::Recursion
     end
   end
 end
