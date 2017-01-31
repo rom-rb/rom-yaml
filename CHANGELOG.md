@@ -1,3 +1,9 @@
+## v1.0.0 2017-01-31
+
+### Changed
+
+* Fixed dependedncy to use published version
+
 ## v1.0.0 2017-01-30
 
 ### Added
