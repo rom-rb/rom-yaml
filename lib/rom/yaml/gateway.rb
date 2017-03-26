@@ -21,6 +21,8 @@ module ROM
     #
     # @api public
     class Gateway < ROM::Gateway
+      adapter :yaml
+
       # @attr_reader [Hash] sources Data loaded from files
       #
       # @api private
