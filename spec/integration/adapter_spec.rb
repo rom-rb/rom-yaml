@@ -63,7 +63,7 @@ RSpec.describe 'YAML adapter' do
 
     describe 'env#relation' do
       it 'returns mapped object' do
-        jane = rom.relation(:users).as(:entity).by_name('Jane').first
+        jane = rom.relations[:users].map_with(:entity).by_name('Jane').first
 
         expect(jane.name).to eql('Jane')
         expect(jane.email).to eql('jane@doe.org')
@@ -94,13 +94,18 @@ RSpec.describe 'YAML adapter' do
 
     let(:users_relation) do
       Class.new(ROM::YAML::Relation) do
-        dataset :users
+        schema :users do
+          attribute :name, ROM::Types::String
+          attribute :email, ROM::Types::String
+        end
       end
     end
 
     let(:tasks_relation) do
       Class.new(ROM::YAML::Relation) do
-        dataset :tasks
+        schema :tasks do
+          attribute :title, ROM::Types::String
+        end
       end
     end
 
@@ -110,11 +115,11 @@ RSpec.describe 'YAML adapter' do
     end
 
     it 'uses one-file-per-relation' do
-      expect(rom.relation(:users)).to match_array([
+      expect(rom.relations[:users].to_a).to eql([
         { name: 'Jane', email: 'jane@doe.org' }
       ])
 
-      expect(rom.relation(:tasks)).to match_array([
+      expect(rom.relations[:tasks].to_a).to eql([
         { title: 'Task One' },
         { title: 'Task Two' },
         { title: 'Task Three' }
