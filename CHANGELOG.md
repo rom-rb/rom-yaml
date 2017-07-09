@@ -1,8 +1,16 @@
-## v1.0.0 2017-01-31
+## v2.0.0 to-be-released
+
+Updated to work with rom 4.0.0.
+
+[Compare v1.0.1...v2.0.0](https://github.com/rom-rb/rom-yaml/compare/v1.0.1...v2.0.0)
+
+## v1.0.1 2017-01-31
 
 ### Changed
 
-* Fixed dependedncy to use published version
+* Fixed dependency to use published version
+
+[Compare v1.0.0...v1.0.1](https://github.com/rom-rb/rom-yaml/compare/v1.0.0...v1.0.1)
 
 ## v1.0.0 2017-01-30
 
