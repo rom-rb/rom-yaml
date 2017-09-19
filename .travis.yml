@@ -8,15 +8,11 @@ after_success:
 rvm:
   - 2.3.3
   - 2.4.1
-  - rbx-3
   - jruby-9.1.13.0
 env:
   global:
     - JRUBY_OPTS='--dev -J-Xmx1024M'
     - COVERAGE='true'
-matrix:
-  allow_failures:
-    - rvm: rbx-3
 notifications:
   webhooks:
     urls:
