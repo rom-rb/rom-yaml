@@ -10,13 +10,8 @@ module ROM
     # Connects to a yaml file and uses it as a data-source
     #
     # @example
-    #   ROM.setup(:yaml, '/path/to/data.yml')
-    #
-    #   rom = ROM.finalize.env
-    #
+    #   rom = ROM.container(:yaml, '/path/to/data.yml')
     #   gateway = rom.gateways[:default]
-    #
-    #   gateway.dataset?(:users) # => true
     #   gateway[:users] # => data under 'users' key from the yaml file
     #
     # @api public
