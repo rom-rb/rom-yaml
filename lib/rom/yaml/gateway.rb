@@ -70,7 +70,7 @@ module ROM
         ::YAML.load_file(path)
       end
 
-      # @param [String] path The absolute path to yaml file
+      # @param [Hash] sources The hashmap containing data loaded from files
       #
       # @api private
       def initialize(sources)
