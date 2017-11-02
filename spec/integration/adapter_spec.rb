@@ -3,25 +3,15 @@ require 'spec_helper'
 require 'rom/lint/spec'
 require 'rom/repository'
 
-RSpec.describe 'YAML adapter' do
+RSpec.describe ROM::YAML do
   let(:configuration) do
-    ROM::Configuration.new( :yaml, path )
+    ROM::Configuration.new(:yaml, path)
   end
 
   let(:root) { Pathname(__FILE__).dirname.join('..') }
-
-  let(:path) { "#{root}/fixtures/test_db.yml" }
   let(:container) { ROM.container(configuration) }
 
   subject(:rom) { container }
-
-  let(:configuration) do
-    ROM::Configuration.new( :yaml, path )
-  end
-
-  let(:root) { Pathname(__FILE__).dirname.join('..') }
-  let(:container) { ROM.container(configuration) }
-  let(:rom) { container }
 
   describe "single file configuration" do
     let(:path) { "#{root}/fixtures/test_db.yml" }
