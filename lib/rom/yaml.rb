@@ -1,4 +1,4 @@
-require 'rom'
+require 'rom-core'
 
 require 'rom/yaml/version'
 require 'rom/yaml/gateway'
