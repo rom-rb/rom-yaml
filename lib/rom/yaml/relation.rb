@@ -10,8 +10,6 @@ module ROM
       adapter :yaml
 
       schema_class YAML::Schema
-
-      option :output_schema, default: -> { schema.to_output_hash }
     end
   end
 end
