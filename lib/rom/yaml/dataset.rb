@@ -10,7 +10,7 @@ module ROM
       #
       # @api private
       def self.row_proc
-        Transforms[:hash_recursion, Transforms[:symbolize_keys]]
+        Transforms[:deep_symbolize_keys]
       end
     end
 
