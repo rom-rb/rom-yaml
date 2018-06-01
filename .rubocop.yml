@@ -9,6 +9,7 @@ Lint/AssignmentInCondition:
 Lint/HandleExceptions:
   Exclude:
     - rakelib/*.rake
+    - spec/spec_helper.rb
 
 # The enforced style doesn’t match Vim’s defaults
 Style/AlignParameters:
@@ -61,3 +62,7 @@ Style/TrivialAccessors:
 # Allow rom-csv
 Style/FileName:
     Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'

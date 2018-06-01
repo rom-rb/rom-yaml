@@ -59,8 +59,8 @@ RSpec.describe ROM::YAML do
         expect(jane.email).to eql('jane@doe.org')
         expect(jane.roles.length).to eql(2)
         expect(jane.roles).to eql([
-          { name: 'Member' }, { name: 'Admin' }
-        ])
+                                    { name: 'Member' }, { name: 'Admin' }
+                                  ])
       end
     end
 
@@ -104,16 +104,24 @@ RSpec.describe ROM::YAML do
       configuration.register_relation(tasks_relation)
     end
 
-    it 'uses one-file-per-relation' do
-      expect(rom.relations[:users].to_a).to eql([
+    let(:user_results) do
+      [
         { name: 'Jane', email: 'jane@doe.org' }
-      ])
+      ]
+    end
 
-      expect(rom.relations[:tasks].to_a).to eql([
+    let(:task_results) do
+      [
         { title: 'Task One' },
         { title: 'Task Two' },
         { title: 'Task Three' }
-      ])
+      ]
+    end
+
+    it 'uses one-file-per-relation' do
+      expect(rom.relations[:users].to_a).to eql(user_results)
+
+      expect(rom.relations[:tasks].to_a).to eql(task_results)
     end
   end
 end
