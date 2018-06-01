@@ -2,6 +2,7 @@ require 'yaml'
 
 require 'rom/gateway'
 require 'rom/yaml/dataset'
+require 'rom/yaml/commands'
 
 module ROM
   module YAML
@@ -39,7 +40,8 @@ module ROM
       #
       # @api public
       def self.new(path)
-        super(load_from(path))
+        sources, mode = load_from(path)
+        super(sources, mode: mode)
       end
 
       # Load data from yaml file(s)
@@ -47,9 +49,12 @@ module ROM
       # @api private
       def self.load_from(path)
         if File.directory?(path)
-          load_files(path)
+          [load_files(path), :one]
         else
-          load_file(path)
+          sources = load_file(path).each_with_object({}) do |(ns, data), h|
+            h[ns] = { data: data, path: path }
+          end
+          [sources, sources.keys.size == 1 ? :one : :many]
         end
       end
 
@@ -57,10 +62,20 @@ module ROM
       #
       # @api private
       def self.load_files(path)
-        Dir["#{path}/*.yml"].each_with_object({}) do |file, h|
-          name = File.basename(file, '.*')
-          h[name] = load_file(file).fetch(name)
+        Dir["#{path}/*.yml"]
+          .reject{ |f| f.match('testing') }
+          .each_with_object({}) do |file, h|
+
+          name = source_name(file)
+          h[name] = {
+            data: load_file(file).fetch(name),
+            path: file
+          }
         end
+      end
+
+      def self.source_name(filename)
+        File.basename(filename, '.*')
       end
 
       # Load yaml file
@@ -73,9 +88,10 @@ module ROM
       # @param [Hash] sources The hashmap containing data loaded from files
       #
       # @api private
-      def initialize(sources)
+      def initialize(sources, options = {})
         @sources = sources
         @datasets = {}
+        @mode = options[:mode]
       end
 
       # Return dataset by its name
@@ -97,7 +113,13 @@ module ROM
       #
       # @api public
       def dataset(name)
-        datasets[name] = Dataset.new(sources.fetch(name.to_s))
+        dataset_source = sources.fetch(name.to_s)
+        datasets[name] = Dataset.new(
+          dataset_source.fetch(:data),
+          dataset_name: name.to_sym,
+          path: dataset_source.fetch(:path),
+          mode: mode
+        )
       end
 
       # Return if a dataset with provided name exists
@@ -106,6 +128,10 @@ module ROM
       def dataset?(name)
         datasets.key?(name)
       end
+
+      private
+
+      attr_reader :mode
     end
   end
 end
