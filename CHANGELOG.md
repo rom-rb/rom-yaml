@@ -1,6 +1,6 @@
-## v2.0.0 to-be-released
+## v2.0.0 2019-04-22
 
-Updated to work with rom 4.0.0.
+* Updated to work with rom ~> 4.1
 
 [Compare v1.0.1...v2.0.0](https://github.com/rom-rb/rom-yaml/compare/v1.0.1...v2.0.0)
 
