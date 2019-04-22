@@ -1,8 +1,3 @@
-require 'spec_helper'
-
-require 'rom/lint/spec'
-require 'rom/repository'
-
 RSpec.describe ROM::YAML do
   let(:configuration) do
     ROM::Configuration.new(:yaml, path)
@@ -24,57 +19,28 @@ RSpec.describe ROM::YAML do
           attribute :roles, ROM::Types::Array
         end
 
+        auto_struct true
+
         def by_name(name)
           restrict(name: name)
         end
       end
     end
 
-    let(:user_mapper) do
-      Class.new(ROM::Mapper) do
-        relation :users
-        register_as :entity
-
-        model name: 'Test::User'
-
-        attribute :name
-        attribute :email
-
-        embedded :roles, type: :array do
-          attribute :name, from: 'role_name'
-        end
-      end
-    end
-
     before do
       configuration.register_relation(users_relation)
-      configuration.register_mapper(user_mapper)
     end
 
-    describe 'env#relation' do
-      it 'returns mapped object' do
-        jane = rom.relations[:users].map_with(:entity).by_name('Jane').first
+    describe 'Relation#first' do
+      it 'returns mapped struct' do
+        jane = rom.relations[:users].by_name('Jane').first
 
         expect(jane.name).to eql('Jane')
         expect(jane.email).to eql('jane@doe.org')
         expect(jane.roles.length).to eql(2)
         expect(jane.roles).to eql([
-          { name: 'Member' }, { name: 'Admin' }
+          { role_name: 'Member' }, { role_name: 'Admin' }
         ])
-      end
-    end
-
-    describe 'with a repository' do
-      let(:repo) do
-        Class.new(ROM::Repository[:users]).new(rom)
-      end
-
-      it 'auto-maps to structs' do
-        user = repo.users.first
-
-        expect(user.name).to eql('Jane')
-        expect(user.email).to eql('jane@doe.org')
-        expect(user.roles.size).to be(2)
       end
     end
   end
