@@ -1,7 +1,9 @@
-## v3.0.0
+## v3.0.0 2019-04-27
 
 * Updated to work with rom ~> 5.0 (cflipse)
 * [BREAKING] Support for ruby <= `2.4` was dropped (cflipse)
+
+[Compare v2.0.0...v3.0.0](https://github.com/rom-rb/rom-yaml/compare/v2.0.0...v3.0.0)
 
 ## v2.0.0 2019-04-22
 
