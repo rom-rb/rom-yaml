@@ -1,3 +1,8 @@
+## v3.0.0
+
+* Updated to work with rom ~> 5.0 (cflipse)
+* [BREAKING] Support for ruby <= `2.4` was dropped (cflipse)
+
 ## v2.0.0 2019-04-22
 
 * Updated to work with rom ~> 4.1
