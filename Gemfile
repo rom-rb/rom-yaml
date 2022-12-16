@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
-  gem 'rom', git: 'https://github.com/rom-rb/rom.git', branch: 'master' do
+  gem 'rom', git: 'https://github.com/rom-rb/rom.git', branch: 'main' do
     gem 'rom-core'
     gem 'rom-changeset'
     gem 'rom-mapper'
